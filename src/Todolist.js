@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-
+import TodoItem from './TodoItem';
 class Todolist extends Component {
 
   constructor(state){
     super(state);
     this.state = {
-      list:[
-        '学习React',
-        '学习Angular',
-        '学习Vue'
-      ],
+      list:[],
       inputValue: ''
     };
   }
 
   clickHandler(){
     this.setState({
-      list: [...this.state.list,this.state.inputValue]
+      list: [...this.state.list,this.state.inputValue],
+      inputValue: ''
     })
   }
 
@@ -26,22 +23,22 @@ class Todolist extends Component {
     })
   }
 
-  liDelateHandel(index){
+  handleDelete(index){
     const list = this.state.list;
     list.splice(index,1);
-    this.setState({list})
+    this.setState({list});
   }
 
   render() {
     return (
       <div>
           <div>
-            <input  onChange={this.inputValueChange.bind(this)} />
+            <input value={this.state.inputValue}  onChange={this.inputValueChange.bind(this)} />
             <button onClick={this.clickHandler.bind(this)}>Add</button>
           </div>
           <ul>
             { this.state.list.map((item,index) => {
-              return <li onClick={this.liDelateHandel.bind(this,index)} key={index}>{item}</li>
+              return <TodoItem delete={this.handleDelete.bind(this)} key={index} content={item} index={index} />
             }) }
           </ul>
       </div>
