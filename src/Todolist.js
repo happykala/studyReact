@@ -8,6 +8,9 @@ class Todolist extends Component {
       list:[],
       inputValue: ''
     };
+    this.clickHandler = this.clickHandler.bind(this);
+    this.inputValueChange = this.inputValueChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   clickHandler(){
@@ -29,17 +32,29 @@ class Todolist extends Component {
     this.setState({list});
   }
 
+  getTodoitem(){
+    return (
+      this.state.list.map((item,index) => {
+        return (
+          <TodoItem 
+            delete={this.handleDelete} 
+            key={index} 
+            content={item} 
+            index={index} />
+        )
+      }) 
+    );
+  }
+
   render() {
     return (
       <div>
           <div>
-            <input value={this.state.inputValue}  onChange={this.inputValueChange.bind(this)} />
-            <button onClick={this.clickHandler.bind(this)}>Add</button>
+            <input value={this.state.inputValue}  onChange={this.inputValueChange} />
+            <button onClick={this.clickHandler}>Add</button>
           </div>
           <ul>
-            { this.state.list.map((item,index) => {
-              return <TodoItem delete={this.handleDelete.bind(this)} key={index} content={item} index={index} />
-            }) }
+            {this.getTodoitem()}
           </ul>
       </div>
     );
