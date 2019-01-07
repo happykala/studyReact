@@ -13,7 +13,13 @@ class TodoItem extends Component{
 
     render(){
         const { content } = this.props;
-        return <div onClick={this.handleDelete.bind(this)}>{content}</div>
+        return (
+            <li 
+                onClick={this.handleDelete.bind(this)}
+                dangerouslySetInnerHTML={{__html:content}}
+            >
+            </li>
+        )
     }
 }
 

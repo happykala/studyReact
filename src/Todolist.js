@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment } from 'react';
 import TodoItem from './TodoItem';
+import './style.css';
 class Todolist extends Component {
 
   constructor(state){
@@ -48,17 +49,19 @@ class Todolist extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
+        {/*todolist功能点*/}
           <div>
-            <input value={this.state.inputValue}  onChange={this.inputValueChange} />
+            <label htmlFor="listdata">请输入列表内容</label>
+            <input id="listdata" className='input' value={this.state.inputValue}  onChange={this.inputValueChange} />
             <button onClick={this.clickHandler}>Add</button>
           </div>
           <ul>
             {this.getTodoitem()}
           </ul>
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default Todolist;
+export default Todolist; 
